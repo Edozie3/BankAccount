@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: bank-account
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
