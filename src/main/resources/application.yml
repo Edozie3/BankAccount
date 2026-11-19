@@ -6,9 +6,3 @@ audit:
   submission-size: 1000            # transactions per audit submission
   queue-capacity: 50000            # transactions waiting to be audited before producers are made to wait
   batch-limit-in-pence: 100000000  # £1,000,000 per batch
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
