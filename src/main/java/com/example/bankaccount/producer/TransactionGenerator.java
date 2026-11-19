@@ -1,7 +1,7 @@
 package com.example.bankaccount.producer;
 
-import com.example.bankaccount.domain.Transaction;
-import com.example.bankaccount.domain.TransactionType;
+import com.example.bankaccount.transaction.Transaction;
+import com.example.bankaccount.transaction.TransactionType;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.random.RandomGenerator;

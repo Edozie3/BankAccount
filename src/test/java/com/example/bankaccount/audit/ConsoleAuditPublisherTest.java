@@ -2,7 +2,7 @@ package com.example.bankaccount.audit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.bankaccount.domain.Transaction;
+import com.example.bankaccount.transaction.Transaction;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;

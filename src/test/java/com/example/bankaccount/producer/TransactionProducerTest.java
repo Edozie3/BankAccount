@@ -9,8 +9,8 @@ import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.example.bankaccount.domain.Transaction;
-import com.example.bankaccount.domain.TransactionType;
+import com.example.bankaccount.transaction.Transaction;
+import com.example.bankaccount.transaction.TransactionType;
 import com.example.bankaccount.service.BankAccountService;
 import java.time.Duration;
 import java.util.List;

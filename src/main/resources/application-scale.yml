@@ -1,0 +1,3 @@
+# Scaled-up audit submissions.
+audit:
+  submission-size: 100000          # transactions per audit submission

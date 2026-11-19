@@ -1,6 +1,6 @@
 package com.example.bankaccount.service;
 
-import com.example.bankaccount.domain.Transaction;
+import com.example.bankaccount.transaction.Transaction;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;

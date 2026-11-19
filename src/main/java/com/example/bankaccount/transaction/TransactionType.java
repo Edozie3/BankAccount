@@ -1,4 +1,4 @@
-package com.example.bankaccount.domain;
+package com.example.bankaccount.transaction;
 
 /**
  * The direction of a {@link Transaction}: credits add to the balance, debits subtract from it.

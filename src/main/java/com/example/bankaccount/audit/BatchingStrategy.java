@@ -1,6 +1,6 @@
 package com.example.bankaccount.audit;
 
-import com.example.bankaccount.domain.Transaction;
+import com.example.bankaccount.transaction.Transaction;
 import java.util.List;
 
 /**

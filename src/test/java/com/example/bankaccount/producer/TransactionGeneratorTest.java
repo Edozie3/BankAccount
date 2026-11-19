@@ -2,8 +2,8 @@ package com.example.bankaccount.producer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.bankaccount.domain.Transaction;
-import com.example.bankaccount.domain.TransactionType;
+import com.example.bankaccount.transaction.Transaction;
+import com.example.bankaccount.transaction.TransactionType;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;

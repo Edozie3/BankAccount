@@ -5,7 +5,7 @@ import com.example.bankaccount.audit.AuditWorker;
 import com.example.bankaccount.audit.BatchingStrategy;
 import com.example.bankaccount.audit.BestFitDecreasingStrategy;
 import com.example.bankaccount.audit.ConsoleAuditPublisher;
-import com.example.bankaccount.domain.Transaction;
+import com.example.bankaccount.transaction.Transaction;
 import com.example.bankaccount.service.BalanceTracker;
 import com.example.bankaccount.service.BankAccountService;
 import java.util.concurrent.ArrayBlockingQueue;

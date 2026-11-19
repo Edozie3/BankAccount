@@ -1,6 +1,6 @@
 package com.example.bankaccount.producer;
 
-import com.example.bankaccount.domain.TransactionType;
+import com.example.bankaccount.transaction.TransactionType;
 import com.example.bankaccount.service.BankAccountService;
 import java.util.Locale;
 import java.util.Objects;

@@ -2,8 +2,8 @@ package com.example.bankaccount.audit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.bankaccount.domain.Transaction;
-import com.example.bankaccount.domain.TransactionType;
+import com.example.bankaccount.transaction.Transaction;
+import com.example.bankaccount.transaction.TransactionType;
 import com.example.bankaccount.producer.TransactionGenerator;
 import java.util.List;
 import java.util.Random;
@@ -34,7 +34,7 @@ class BestFitDecreasingStrategyTest {
 
     @Test
     void givenCreditAndDebitOf600k_whenBatched_thenTheyAreNotPlacedTogether() {
-        // given: if a debit offset a credit their signed sum would be £0 and they would share one batch
+        // given: if a debit offsets a credit their signed sum would be £0 and they would share one batch
         Transaction credit = Transaction.credit("c-1", 600_000 * POUND);
         Transaction debit = Transaction.debit("d-1", 600_000 * POUND);
 
@@ -87,20 +87,42 @@ class BestFitDecreasingStrategyTest {
     }
 
     /**
-     * No set of batches can hold the total in fewer than ⌈total ÷ limit⌉ batches, so matching that count means
-     * the packing is optimal. The fixed seed keeps the data, and therefore the expected count, the same each run.
+     * Checks that the packing is optimal: no set of batches can hold the total in fewer than ⌈total ÷ limit⌉
+     * batches. The fixed seed keeps the data, and therefore the expected count, the same each run.
      */
     @Test
     void givenRandomSubmission_whenBatched_thenBatchCountEqualsLowerBound() {
         // given
         List<Transaction> submission = randomSubmission(SUBMISSION_SIZE, SEED);
         long totalInPence = submission.stream().mapToLong(Transaction::absoluteAmountInPence).sum();
-        long lowerBound = (totalInPence + LIMIT_IN_PENCE - 1) / LIMIT_IN_PENCE;   // ceiling division
+        long lowerBound = Math.ceilDiv(totalInPence, LIMIT_IN_PENCE);
 
         // when
         List<Batch> batches = strategy.batch(submission);
 
         // then
+        assertThat(batches).hasSize((int) lowerBound);
+    }
+
+    /**
+     * Same checks as above at the scaled-up submission size of 100,000: batches stay within the limit, every
+     * transaction is batched exactly once, and the packing is still optimal.
+     */
+    @Test
+    void givenSubmissionOf100k_whenBatched_thenBatchesAreValidAndOptimal() {
+        // given
+        int scaledSubmissionSize = 100_000;
+        List<Transaction> submission = randomSubmission(scaledSubmissionSize, SEED);
+        long totalInPence = submission.stream().mapToLong(Transaction::absoluteAmountInPence).sum();
+        long lowerBound = Math.ceilDiv(totalInPence, LIMIT_IN_PENCE);
+
+        // when
+        List<Batch> batches = strategy.batch(submission);
+
+        // then
+        assertThat(batches).allSatisfy(batch ->
+                assertThat(batch.totalValueInPence()).isLessThanOrEqualTo(LIMIT_IN_PENCE));
+        assertThat(batches.stream().mapToInt(Batch::countOfTransactions).sum()).isEqualTo(scaledSubmissionSize);
         assertThat(batches).hasSize((int) lowerBound);
     }
 

@@ -1,4 +1,4 @@
-package com.example.bankaccount.domain;
+package com.example.bankaccount.transaction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
