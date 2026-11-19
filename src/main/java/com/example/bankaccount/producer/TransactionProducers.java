@@ -6,11 +6,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import java.util.List;
 import java.util.SplittableRandom;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 /**
- * Owns the credit and debit producers
- * <p>TODO (Step 4): annotate with {@code @Component} once a {@link BankAccountService} bean exists.
+ * Owns the credit and debit producers.
  */
+@Component
+@DependsOn("auditWorker")
 public class TransactionProducers {
 
     /** 25 credits per second plus 25 debits per second gives the required 50 per second in total. */
