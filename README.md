@@ -1,6 +1,6 @@
 # Bank Account
 
-A Spring Boot service that processes a continuous stream of transactions on a bank account. It tracks the running balance, exposes it over a REST API, and sends every transaction to an audit system in submissions that are packed into the fewest possible batches.
+A Spring Boot service that processes a continuous stream of transactions on a bank account. It tracks the running balance, exposes it over a REST API, and sends every transaction to an audit system in submissions arranged in batches.
 
 ## Design
 
@@ -68,6 +68,8 @@ or
 ```
 java -jar target/bank-account-0.0.1-SNAPSHOT.jar --spring.profiles.active=scale
 ```
+
+(With this profile, the first submission is printed after approximately 33 minutes, as generating 100,000 transactions at a rate of 50 per second a while.)
 
 ## Account Balance API
 

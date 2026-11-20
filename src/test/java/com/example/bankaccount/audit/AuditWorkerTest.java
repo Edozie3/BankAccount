@@ -45,7 +45,7 @@ class AuditWorkerTest {
     @SuppressWarnings("unchecked")
     void givenExactly1000QueuedTransactions_whenWorkerRuns_thenOneSubmissionOf1000IsBatchedAndPublished() {
         // given
-        List<Transaction> transactions = transactions(0, 1000);
+        List<Transaction> transactions = transactions(1000);
         auditQueue.addAll(transactions);
 
         // when
@@ -61,7 +61,7 @@ class AuditWorkerTest {
     @Test
     void given999QueuedTransactions_whenWorkerRuns_thenNothingIsPublished() {
         // given
-        auditQueue.addAll(transactions(0, 999));
+        auditQueue.addAll(transactions(999));
 
         // when
         auditWorker.start();
@@ -75,7 +75,7 @@ class AuditWorkerTest {
     @SuppressWarnings("unchecked")
     void given2500QueuedTransactions_whenWorkerRuns_thenTwoSubmissionsAndNoTransactionLostOrRepeated() {
         // given
-        List<Transaction> transactions = transactions(0, 2500);
+        List<Transaction> transactions = transactions(2500);
         auditQueue.addAll(transactions);
 
         // when
@@ -93,7 +93,7 @@ class AuditWorkerTest {
     @Test
     void givenBatchesFromStrategy_whenSubmitting_thenPublisherReceivesThoseBatches() {
         // given
-        List<Transaction> transactions = transactions(0, 1000);
+        List<Transaction> transactions = transactions(1000);
         List<Batch> batches = List.of(
                 new Batch(transactions.subList(0, 600), 1L),
                 new Batch(transactions.subList(600, 1000), 2L));
@@ -107,8 +107,8 @@ class AuditWorkerTest {
         verify(auditPublisher, timeout(MAX_WAIT_MILLIS)).publish(new Submission(batches));
     }
 
-    private static List<Transaction> transactions(int fromInclusive, int toExclusive) {
-        return IntStream.range(fromInclusive, toExclusive)
+    private static List<Transaction> transactions(int toExclusive) {
+        return IntStream.range(0, toExclusive)
                 .mapToObj(i -> Transaction.credit("tx-" + i, 20_000 + i))
                 .toList();
     }

@@ -6,7 +6,6 @@ import java.util.Objects;
  * An immutable credit or debit against the account.
  *
  * <p>All monetary values are held as a whole number of <b>pence</b> (GBP minor units) in a {@code long}
- * so that arithmetic is cheap.
  *
  * <ul>
  *   <li>Credits have a <b>positive</b> amount, e.g. £250.00 credit → {@code amountInPence = 25_000}</li>
@@ -48,14 +47,6 @@ public record Transaction(String id, long amountInPence) {
     public static Transaction debit(String id, long pence) {
         requirePositive(pence);
         return new Transaction(id, -pence);
-    }
-
-    public boolean isCredit() {
-        return amountInPence > 0;
-    }
-
-    public boolean isDebit() {
-        return amountInPence < 0;
     }
 
     /**

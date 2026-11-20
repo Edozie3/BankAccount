@@ -72,9 +72,9 @@ class TransactionProducerTest {
         // then
         List<Transaction> produced = bankAccountService.transactions();
         if (type == TransactionType.CREDIT) {
-            assertThat(produced).allSatisfy(tx -> assertThat(tx.isCredit()).isTrue());
+            assertThat(produced).allSatisfy(tx -> assertThat(tx.amountInPence()).isPositive());
         } else {
-            assertThat(produced).allSatisfy(tx -> assertThat(tx.isDebit()).isTrue());
+            assertThat(produced).allSatisfy(tx -> assertThat(tx.amountInPence()).isNegative());
         }
     }
 

@@ -19,8 +19,6 @@ class TransactionTest {
 
         // then
         assertThat(credit.amountInPence()).isEqualTo(25_000);
-        assertThat(credit.isCredit()).isTrue();
-        assertThat(credit.isDebit()).isFalse();
     }
 
     @ParameterizedTest
@@ -45,8 +43,6 @@ class TransactionTest {
 
         // then
         assertThat(debit.amountInPence()).isEqualTo(-25_000);
-        assertThat(debit.isDebit()).isTrue();
-        assertThat(debit.isCredit()).isFalse();
     }
 
     @ParameterizedTest

@@ -20,7 +20,7 @@ public class TransactionGenerator {
     private final RandomGenerator random;
 
     /**
-     * @param random source of randomness for amounts;
+     * @param random source of randomness for amounts
      */
     public TransactionGenerator(RandomGenerator random) {
         this.random = Objects.requireNonNull(random, "random must not be null");
