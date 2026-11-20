@@ -7,7 +7,7 @@ import java.util.Objects;
  * An immutable credit or debit against the account.
  *
  * <p>All monetary values are held as a whole number of <b>pence</b> (GBP minor units) in a {@code long}
- * so that arithmetic is exact and cheap.
+ * so that arithmetic is cheap.
  *
  * <ul>
  *   <li>Credits have a <b>positive</b> amount, e.g. £250.00 credit → {@code amountInPence = 25_000}</li>

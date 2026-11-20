@@ -78,7 +78,6 @@ class TransactionProducerTest {
         }
     }
 
-    // #12
     @Test
     void givenRateOf25PerSecond_whenStarted_thenScheduledEvery40Milliseconds() {
         // given

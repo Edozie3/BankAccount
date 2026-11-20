@@ -127,7 +127,7 @@ class BestFitDecreasingStrategyTest {
     }
 
     /**
-     * A random submission of alternating credits and debits with amounts between £200 and £500,000).
+     * A random submission of alternating credits and debits with amounts between £200 and £500,000.
      */
     private static List<Transaction> randomSubmission(int size, long seed) {
         TransactionGenerator generator = new TransactionGenerator(new Random(seed));

@@ -1,6 +1,6 @@
 # Bank Account
 
-A Spring Boot service that processes a continuous stream of transactions on a bank account. It tracks the running balance, exposes it over REST, and sends every transaction to an audit system in submissions that are packed into the fewest possible batches.
+A Spring Boot service that processes a continuous stream of transactions on a bank account. It tracks the running balance, exposes it over a REST API, and sends every transaction to an audit system in submissions that are packed into the fewest possible batches.
 
 ## Design
 
@@ -22,11 +22,11 @@ debit producer  ─┘         │                                              
 | `service` | `BankAccountService` and its implementation `BalanceTracker`                |
 | `audit` | Audit worker, batching strategy and console publisher                       |
 | `api` | REST controller for retrieving the balance                                  |
-| `config` | Bean wiring and configuration properties                                    |
+| `config` | Bean and property configuration                                             |
 
 ### Batching
 
-Submissions are grouped using a Best-Fit Decreasing (BFD) strategy. Transactions are sorted by absolute amount in descending order and placed into the existing batch with the least remaining capacity that can accommodate them. A new batch is created only when no existing batch has sufficient space. This approach minimises wasted capacity and keeps the number of batches as low as possible.
+Submissions are grouped using a Best-Fit Decreasing strategy. Transactions are sorted by absolute amount in descending order and placed into the existing batch with the least remaining capacity that can accommodate them. A new batch is created only when no existing batch has sufficient space. This approach minimises wasted capacity and keeps the number of batches as low as possible.
 
 ## Requirements
 
@@ -69,8 +69,6 @@ or
 java -jar target/bank-account-0.0.1-SNAPSHOT.jar --spring.profiles.active=scale
 ```
 
-(With the scale profile, the first submission is printed after approximately 33 minutes, as generating 100,000 transactions at a rate of 50 per second a while. To observe batching at this scale immediately, run the 100,000-transaction unit test or the benchmark below.)
-
 ## Account Balance API
 
 ```
@@ -93,7 +91,7 @@ Run the benchmark using:
 mvn test-compile exec:exec
 ```
 
-A full run takes approximately four minutes. The results below were recorded using JDK 21:
+The results below were recorded using JDK 21:
 
 ```
 Transactions per submission  Average time to batch (ms)  Margin of error (ms)  Measurements  Increase on previous size
@@ -103,4 +101,4 @@ Transactions per submission  Average time to batch (ms)  Margin of error (ms)  M
                   1,000,000                    1,938.25              ± 62.53            30                      14.8x
 ```
 
-As submission size increases tenfold, batching takes roughly 12–15 times longer. This is consistent with the expected performance of the sorting and lookup operations ( O(n log n) ).
+As submission size increases tenfold, batching takes roughly 12–15 times longer. This is consistent with the expected performance of the sorting and lookup operations in the batching strategy( O(n log n) ).

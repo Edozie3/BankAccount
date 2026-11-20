@@ -29,8 +29,6 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 /**
  * Measures the average time to batch one submission at sizes growing by 10x, from the default 1,000 up to
  * 1,000,000.
- *
- * <p>Run with {@code mvn test-compile exec:exec}.
  */
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)

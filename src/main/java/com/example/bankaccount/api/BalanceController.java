@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST API for balance enquiries.
+ * REST API for balance queries.
  */
 @RestController
 @RequestMapping("/api/v1/account")
