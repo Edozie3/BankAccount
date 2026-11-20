@@ -3,7 +3,6 @@ package com.example.bankaccount.transaction;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -99,29 +98,5 @@ class TransactionTest {
         // then
         assertThat(creditAbsolute).isEqualTo(50_000_000);
         assertThat(debitAbsolute).isEqualTo(50_000_000);
-    }
-
-    @Test
-    void givenCreditInPence_whenConvertingToPounds_thenExactToTwoDecimalPlaces() {
-        // given
-        Transaction credit = Transaction.credit("c", 20_001);
-
-        // when
-        BigDecimal pounds = credit.amountInPounds();
-
-        // then
-        assertThat(pounds).isEqualTo(new BigDecimal("200.01"));
-    }
-
-    @Test
-    void givenDebitInPence_whenConvertingToPounds_thenNegativeAndExact() {
-        // given
-        Transaction debit = Transaction.debit("d", 50_000_000);
-
-        // when
-        BigDecimal pounds = debit.amountInPounds();
-
-        // then
-        assertThat(pounds).isEqualTo(new BigDecimal("-500000.00"));
     }
 }

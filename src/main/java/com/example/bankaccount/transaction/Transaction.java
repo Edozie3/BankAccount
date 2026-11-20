@@ -1,6 +1,5 @@
 package com.example.bankaccount.transaction;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -65,14 +64,6 @@ public record Transaction(String id, long amountInPence) {
      */
     public long absoluteAmountInPence() {
         return Math.abs(amountInPence);
-    }
-
-    /**
-     * The signed amount converted to pounds, e.g. {@code -25_000} pence → {@code -250.00}.
-     * Intended for display and API boundaries only.
-     */
-    public BigDecimal amountInPounds() {
-        return BigDecimal.valueOf(amountInPence, 2);
     }
 
     private static void requirePositive(long pence) {
